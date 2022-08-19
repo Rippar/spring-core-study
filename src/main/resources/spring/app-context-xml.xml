@@ -2,8 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:c="http://www.springframework.org/schema/c"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
     <bean id="messageProvider"
           class="by.murzo.springstudy.chapter3.annotation.ConfigurableMessageProvider"
@@ -14,5 +14,61 @@
         <constructor-arg type="java.lang.String" value="90"/>
     </bean>
 
+    <bean id="lyricHolder"
+          class="by.murzo.springstudy.chapter3.xml.LyricHolder"/>
+
+    <bean id="injectCollection"
+          class="by.murzo.springstudy.chapter3.xml.CollectionInjection">
+
+        <property name="map">
+            <map>
+                <entry key="someValue" value="It's a Friday, we finally made it"/>
+                <entry key="someBean" value-ref="lyricHolder"/>
+            </map>
+        </property>
+
+        <property name="props">
+            <props>
+                <prop key="firstName">John</prop>
+                <prop key="secondName">Mayer</prop>
+            </props>
+        </property>
+
+        <property name="set">
+            <set>
+                <value>I can't believe I get to see
+                    your face
+                </value>
+                <ref bean="lyricHolder"/>
+            </set>
+        </property>
+
+        <property name="list">
+            <list>
+                <value>You've been working and I've
+                    been waiting
+                </value>
+                <ref bean="lyricHolder"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="FtpArtworkSender"
+          class="by.murzo.springstudy.chapter3.FtpArtworkSender"/>
+
+    <bean id="EmailArtworkSender"
+          class="by.murzo.springstudy.chapter3.EmailArtworkSender"/>
+
+    <bean id="ArtworkManager"
+          class="by.murzo.springstudy.chapter3.ArtworkManager">
+
+        <property name="artworkSenderList">
+            <list>
+                <ref bean="FtpArtworkSender"/>
+                <ref bean="EmailArtworkSender"/>
+            </list>
+        </property>
+
+    </bean>
 
 </beans>

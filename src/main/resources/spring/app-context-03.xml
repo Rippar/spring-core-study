@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="fooOne"
+          class="by.murzo.springstudy.chapter3.xml.FooImplOne"/>
+    <bean id="fooTwo"
+          class="by.murzo.springstudy.chapter3.xml.FooImplTwo"
+    primary="true"/>
+
+    <bean id="barOne"
+          class="by.murzo.springstudy.chapter3.xml.Bar"/>
+    <bean id="targetByName" autowire="byName"
+          class="by.murzo.springstudy.chapter3.xml.Target"
+          lazy-init="true"/>
+    <bean id="targetByType" autowire="byType"
+          class="by.murzo.springstudy.chapter3.xml.Target"
+          lazy-init="true"/>
+    <bean id="targetConstructor" autowire="constructor"
+          class="by.murzo.springstudy.chapter3.xml.Target"
+          lazy-init="true"/>
+
+</beans>
